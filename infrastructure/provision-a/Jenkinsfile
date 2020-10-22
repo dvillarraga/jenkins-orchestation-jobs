@@ -1,0 +1,29 @@
+/*
+ * Pipeline: provision-a
+ */
+
+pipeline{
+    agent any
+    
+    stages{
+      stage("Validating Changes"){
+        when{
+          expression { BRANCH_NAME ==~ /^(?:(?!prod).)*$/ }
+        }
+        steps{
+          echo "Branch is different than prod"
+        }
+      }
+      stage("Build Job"){
+        sh "./build.sh"
+      }
+    }
+    post{
+        success{
+            echo "========pipeline executed successfully ========"
+        }
+        failure{
+            echo "========pipeline execution failed========"
+        }
+    }
+}
