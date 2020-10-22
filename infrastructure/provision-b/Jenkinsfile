@@ -31,13 +31,13 @@ pipeline{
         }
         steps{
           parallel(
-            function-a: {
+            fna: {
               echo "#########################"
               echo "### Launching FUNCTION-A"
               echo "#########################"
               build "../../functions/function-a/${env.BRANCH_NAME}"
             }
-            function-b:{
+            fnb: {
               echo "#########################"
               echo "### Launching FUNCTION-B"
               echo "#########################"
