@@ -30,7 +30,7 @@ pipeline{
           expression { BRANCH_NAME ==~ /^(?:(?!prod).)*$/ }
         }
         steps{
-          parallel(
+          parallel{
             stage("Launching Fn A"){
               steps{
                 echo "#########################"
@@ -47,8 +47,7 @@ pipeline{
                 build "../../functions/function-b/${env.BRANCH_NAME}"
               }
             }
-          )
-          
+          }
         }
       }
     }
