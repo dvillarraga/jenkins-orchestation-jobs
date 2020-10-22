@@ -17,7 +17,7 @@ pipeline{
     stages{
       stage("Validating Changes"){
         when{
-          expression { BRANCH_NAME ==~ ^(?:(?!prod).)*$ }
+          expression { BRANCH_NAME ==~ /^(?:(?!prod).)*$/ }
         }
         steps{
           script{
