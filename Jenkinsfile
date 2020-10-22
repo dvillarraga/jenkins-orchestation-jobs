@@ -47,6 +47,10 @@ pipeline{
           }
         }
       }
+      stage("Build Job"){
+        build ""
+
+      }
     }
     post{
         success{
