@@ -15,7 +15,9 @@ pipeline{
         }
       }
       stage("Build Job"){
-        sh "./build.sh"
+        steps{
+          sh "./build.sh"
+        }
       }
     }
     post{
