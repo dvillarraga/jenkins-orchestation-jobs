@@ -4,7 +4,9 @@
 
 pipeline{
     agent any
-    
+    parameters{
+      string(name: 'project', defaultValue:'infrastructure/provision-a', description: 'Path of project')
+    }
     stages{
       stage("Validating Changes"){
         when{
@@ -16,7 +18,7 @@ pipeline{
       }
       stage("Build Job"){
         steps{
-          sh "./build.sh"
+          sh "${env.WORKSPACE}${params.project}/build.sh"
         }
       }
     }
