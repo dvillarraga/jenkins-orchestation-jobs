@@ -36,7 +36,7 @@ pipeline{
                   println "READY"
                   println "Commits are: $commits"
                 } else {
-                  println "There were no changes"
+                  println "There were no previous successful builds"
                 }
               }
             }
