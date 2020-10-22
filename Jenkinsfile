@@ -10,15 +10,17 @@ pipeline{
         stage("Validating Changes"){
             steps{
                 echo "======== Validating changes in Infrastructure ========"
-                myoutput = sh (
-                  script: """
-                  #!/bin/bash
-                  echo $PWD
-                  echo \$(ls -lsa)
-                  """,
-                  encoding: "UTF-8",
-                  returnStdout: true
-                )
+                script {
+                  myoutput = sh (
+                    script: """
+                    #!/bin/bash
+                    echo $PWD
+                    echo \$(ls -lsa)
+                    """,
+                    encoding: "UTF-8",
+                    returnStdout: true
+                  )
+                }
                 echo "The test output is ${myoutput}"
             }
         }
