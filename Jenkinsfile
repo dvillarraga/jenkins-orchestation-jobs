@@ -14,7 +14,7 @@ pipeline{
                   script: """
                   #!/bin/bash
                   echo $PWD
-                  echo $(ls -lsa)
+                  echo \$(ls -lsa)
                   """
                   encoding: "UTF-8"
                   returnStdout: true
