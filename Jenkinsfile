@@ -52,7 +52,10 @@ pipeline{
           expression { BRANCH_NAME ==~ /^(?:(?!prod).)*$/ }
         }
         steps{
-          echo "Building job"
+          echo "#########################"
+          echo "### Launching PROVISION-A"
+          echo "#########################"
+          build "../../infrastructure/provision-a/${env.BRANCH_NAME}"
         }
       }
     }
