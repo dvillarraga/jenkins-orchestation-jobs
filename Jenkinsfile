@@ -35,6 +35,8 @@ pipeline{
                   ).split('\n')
                   println "READY"
                   println "Commits are: $commits"
+                } else {
+                  println "There were no changes"
                 }
               }
             }
