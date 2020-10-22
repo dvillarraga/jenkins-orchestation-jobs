@@ -15,8 +15,8 @@ pipeline{
                   #!/bin/bash
                   echo $PWD
                   echo \$(ls -lsa)
-                  """
-                  encoding: "UTF-8"
+                  """,
+                  encoding: "UTF-8",
                   returnStdout: true
                 )
                 echo "The test output is ${myoutput}"
