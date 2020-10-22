@@ -18,7 +18,7 @@ pipeline{
       }
       stage("Build Job"){
         steps{
-          sh "${env.WORKSPACE}${params.project}/build.sh"
+          sh "${env.WORKSPACE}/${params.project}/build.sh"
         }
       }
     }
