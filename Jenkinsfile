@@ -4,10 +4,6 @@
 
 @Library('my-shared-library')
 
-properties([
-  pipelineTriggers([pollSCM('*/2 * * * *')])
-])
-
 def myoutput
 def lastSuccessfulCommit = buildscm.getLastSuccessfulCommit()
 def currentCommit = buildscm.commitHashForBuild( currentBuild.rawBuild )
@@ -15,6 +11,9 @@ def commits
 
 pipeline{
     agent any
+    triggers{
+      cron('*/2 * * * *')
+    }
     stages{
         stage("Validating Changes"){
             steps{
