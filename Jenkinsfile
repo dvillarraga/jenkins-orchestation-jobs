@@ -32,7 +32,7 @@ pipeline{
                     script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
                     returnStdout: true
                   ).split('\n')
-                  println "change one"
+                  println "READY"
                   println "Commits are: $commits"
                 }
               }
