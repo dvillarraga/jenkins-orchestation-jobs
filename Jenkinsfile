@@ -48,8 +48,12 @@ pipeline{
         }
       }
       stage("Build Job"){
-        build ""
-
+        when{
+          expression { BRANCH_NAME ==~ /^(?:(?!prod).)*$/ }
+        }
+        steps{
+          echo "Building job"
+        }
       }
     }
     post{
