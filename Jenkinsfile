@@ -9,7 +9,7 @@ pipeline{
     stages{
         stage("Validating Changes"){
             steps{
-              script {
+              script{
                 myoutput = sh (
                   script: """
                   #!/bin/bash
