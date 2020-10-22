@@ -56,15 +56,4 @@ pipeline{
         }
       }
     }
-    post{
-      when{
-        expression { BRANCH_NAME ==~ /^(?:(?!prod).)*$/ }
-      }
-      success{
-          echo "========pipeline executed successfully ========"
-      }
-      failure{
-          echo "========pipeline execution failed========"
-      }
-    }
 }

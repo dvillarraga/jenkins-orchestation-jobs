@@ -1,11 +1,11 @@
 /*
- * Pipeline: provision-a
+ * Pipeline: function-a
  */
 
 pipeline{
     agent any
     parameters{
-      string(name: 'project', defaultValue:'infrastructure/provision-a', description: 'Path of project')
+      string(name: 'project', defaultValue:'functions/function-a', description: 'Path of project')
     }
     stages{
       stage("Validating Changes"){
@@ -23,17 +23,6 @@ pipeline{
         steps{
           sh "chmod +x ${env.WORKSPACE}/${params.project}/build.sh"
           sh "${env.WORKSPACE}/${params.project}/build.sh"
-        }
-      }
-      stage("Launching Next Job"){
-        when{
-          expression { BRANCH_NAME ==~ /^(?:(?!prod).)*$/ }
-        }
-        steps{
-          echo "#########################"
-          echo "### Launching PROVISION-B"
-          echo "#########################"
-          build "../provision-b/${env.BRANCH_NAME}"
         }
       }
     }
