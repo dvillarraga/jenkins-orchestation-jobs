@@ -29,23 +29,21 @@ pipeline{
         when{
           expression { BRANCH_NAME ==~ /^(?:(?!prod).)*$/ }
         }
-        steps{
-          parallel{
-            stage("Launching Fn A"){
-              steps{
-                echo "#########################"
-                echo "### Launching FUNCTION-A"
-                echo "#########################"
-                build "../../functions/function-a/${env.BRANCH_NAME}"
-              }
+        parallel{
+          stage("Launching Fn A"){
+            steps{
+              echo "#########################"
+              echo "### Launching FUNCTION-A"
+              echo "#########################"
+              build "../../functions/function-a/${env.BRANCH_NAME}"
             }
-            stage("Launching Fn B"){
-              steps{
-                echo "#########################"
-                echo "### Launching FUNCTION-B"
-                echo "#########################"
-                build "../../functions/function-b/${env.BRANCH_NAME}"
-              }
+          }
+          stage("Launching Fn B"){
+            steps{
+              echo "#########################"
+              echo "### Launching FUNCTION-B"
+              echo "#########################"
+              build "../../functions/function-b/${env.BRANCH_NAME}"
             }
           }
         }
