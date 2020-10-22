@@ -14,7 +14,7 @@ pipeline{
     stages{
         stage("Validating Changes"){
             steps{
-              scripttheerror{
+              script{
                 myoutput = sh (
                   script: """
                   #!/bin/bash
@@ -28,6 +28,7 @@ pipeline{
               echo "The test output is ${myoutput}"
               script{
                 if (lastSuccessfulCommit) {
+                  println "The last successful commit was: $lastSuccessfulCommit"
                   commits = sh(
                     script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
                     returnStdout: true
