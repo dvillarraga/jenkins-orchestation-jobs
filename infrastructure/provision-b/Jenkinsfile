@@ -5,7 +5,7 @@
 pipeline{
     agent any
     parameters{
-      string(name: 'project', defaultValue:'infrastructure/provision-a', description: 'Path of project')
+      string(name: 'project', defaultValue:'infrastructure/provision-b', description: 'Path of project')
     }
     stages{
       stage("Validating Changes"){
@@ -23,6 +23,28 @@ pipeline{
         steps{
           sh "chmod +x ${env.WORKSPACE}/${params.project}/build.sh"
           sh "${env.WORKSPACE}/${params.project}/build.sh"
+        }
+      }
+      stage("Launching Next Jobs"){
+        when{
+          expression { BRANCH_NAME ==~ /^(?:(?!prod).)*$/ }
+        }
+        steps{
+          parallel(
+            function-a: {
+              echo "#########################"
+              echo "### Launching FUNCTION-A"
+              echo "#########################"
+              build "../../functions/function-a/${env.BRANCH_NAME}"
+            }
+            function-b:{
+              echo "#########################"
+              echo "### Launching FUNCTION-B"
+              echo "#########################"
+              build "../../functions/function-b/${env.BRANCH_NAME}"
+            }
+          )
+          
         }
       }
     }
