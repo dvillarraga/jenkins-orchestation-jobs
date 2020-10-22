@@ -55,7 +55,7 @@ pipeline{
           echo "#########################"
           echo "### Launching PROVISION-A"
           echo "#########################"
-          build "../../infrastructure/provision-a/${env.BRANCH_NAME}"
+          build "../infrastructure/provision-a/${env.BRANCH_NAME}"
         }
       }
     }
