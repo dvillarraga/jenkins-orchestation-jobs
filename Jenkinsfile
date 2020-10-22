@@ -14,7 +14,7 @@ pipeline{
     stages{
         stage("Validating Changes"){
             steps{
-              script{
+              scripttheerror{
                 myoutput = sh (
                   script: """
                   #!/bin/bash
