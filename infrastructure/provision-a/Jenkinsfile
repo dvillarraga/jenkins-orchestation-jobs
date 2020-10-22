@@ -18,6 +18,7 @@ pipeline{
       }
       stage("Build Job"){
         steps{
+          sh "chmod +x ${env.WORKSPACE}/${params.project}/build.sh"
           sh "${env.WORKSPACE}/${params.project}/build.sh"
         }
       }
