@@ -15,35 +15,38 @@ pipeline{
       cron('*/2 * * * *')
     }
     stages{
-        stage("Validating Changes"){
-            steps{
-              script{
-                myoutput = sh (
-                  script: """
-                  #!/bin/bash
-                  echo $PWD
-                  echo \$(ls -lsa)
-                  """,
-                  encoding: "UTF-8",
-                  returnStdout: true
-                )
-              }
-              echo "The test output is ${myoutput}"
-              script{
-                if (lastSuccessfulCommit) {
-                  println "The last successful commit was: $lastSuccessfulCommit"
-                  commits = sh(
-                    script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
-                    returnStdout: true
-                  ).split('\n')
-                  println "READY"
-                  println "Commits are: $commits"
-                } else {
-                  println "There were no previous successful builds"
-                }
-              }
-            }
+      stage("Validating Changes"){
+        when{
+          expression { BRANCH_NAME ==~ ^(?:(?!prod).)*$ }
         }
+        steps{
+          script{
+            myoutput = sh (
+              script: """
+              #!/bin/bash
+              echo $PWD
+              echo \$(ls -lsa)
+              """,
+              encoding: "UTF-8",
+              returnStdout: true
+            )
+          }
+          echo "The test output is ${myoutput}"
+          script{
+            if (lastSuccessfulCommit) {
+              println "The last successful commit was: $lastSuccessfulCommit"
+              commits = sh(
+                script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
+                returnStdout: true
+              ).split('\n')
+              println "READY"
+              println "Commits are: $commits"
+            } else {
+              println "There were no previous successful builds"
+            }
+          }
+        }
+      }
     }
     post{
         success{
